@@ -1,0 +1,60 @@
+
+
+.edit-icon {
+  margin-left:20px;
+  cursor: pointer;
+}
+
+
+.clients-manage-table {
+  width: 60%;
+  border-collapse: collapse;
+  background-color: #ede6d9fe;
+  margin-top: 0px; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.clients-manage-table thead {
+  background-color: #0d47a1; /* deep blue */
+  color: #ffffff;
+}
+
+.clients-manage-table th, 
+.clients-manage-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+
+.clients-manage-table tbody tr:hover {
+  background-color: #c19d0d; /* light blue hover */
+  transition: background-color 0.2s ease;
+}
+
+.clients-manage-table th {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 15px;
+}
+
+.table-heading {
+  margin-left: 40px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  font-size: 1.75rem;          /* Clear and prominent */
+  font-weight: 700;            /* Bold */
+  color: #0d47a1;              /* Professional navy blue */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-left: 4px solid #0d47a1; /* Accent line on left */
+  padding-left: 12px;
+  user-select: none;           /* Optional: prevent text selection */
+}
+
+
+.add-client-btn{
+  margin-left: 100px;
+}

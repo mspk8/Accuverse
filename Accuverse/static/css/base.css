@@ -1,0 +1,60 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }   
+        .sidebar {
+            width: 200px;
+            background-color: #135B7E;
+            color: white;
+            position: fixed;
+            height: 100%;
+            padding: 20px;
+        }
+       
+        .sidebar img {
+            width: max-content;
+            height: max-content;
+            max-width: 120px;
+            margin-bottom: 20px;
+        }
+        .main {
+            margin-left: 200px;
+            background-color: #E0EFFC;
+            min-height: 100vh;
+        }
+        .topbar {
+            padding: 10px;
+            background-color: #D6E9F8;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .topbar button {
+            background-color: #135B7E;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid black;
+            cursor: default;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section a {
+            color: white;
+            display: block;
+            padding-left: 10px;
+            margin: 5px 0;
+            text-decoration: none;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        hr {
+            border: 0;
+            height: 0px;
+            background-color: white;
+        }
+   

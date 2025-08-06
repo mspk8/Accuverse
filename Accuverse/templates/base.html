@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Accuverse{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {%block extra_css%}
+    <!-- for page specific css-->
+    {%endblock%}
+
+ 
+</head>
+<body>  
+    <div class="sidebar">
+        <div class "sidebar img">
+    <img src="{% static 'accuverse_logo.webp' %}" style="width: 200px; height: 100px; margin-left: 40px;" alt="Logo">
+            </div>
+        <hr style="border: none; height: 3px; background-color: #f1e024ff;">
+
+        <div class="section">
+            <div class="section-title">Clients</div>
+            <a href="#">- Dashboard</a>
+            <a href="#">- Manage</a>
+            <a href="#">- Documents</a>
+        </div>
+        <div class="section">
+            <div class="section-title">Calendar</div>
+            <a href="#">- Dashboard</a>
+        </div>
+        <div class="section">
+            <div class="section-title">Staff</div>
+            <a href="#">- Dashboard</a>
+            <a href="#">- Manage</a>
+            <a href="#">- Assign</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <button>Hello {{ user.username|default:'{USER}' }}</button>
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

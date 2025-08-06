@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/client_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/client_manage.css' %}">
+
+<title>{% block title %}Clients Manage{% endblock %}</title>
+
+{% endblock %}
+
+{%block content%}
+<body>
+  <div><h2 class="table-heading">Manage Clients</h2>
+  </div>
+  <div>
+    <table class="clients-manage-table" style="margin-left:20px;">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th> Edit </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in show_clients %}
+        <tr>
+          <td>{{ client.company_name }}</td>
+          <td class="edit-icon">🖊</td>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+
+{%endblock%}
