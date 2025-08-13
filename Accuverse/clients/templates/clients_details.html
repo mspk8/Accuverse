@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/client_details.css' %}">
+<title>{% block title %}Client Details{% endblock %}</title>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <a href="{% url 'dashboard' %}" class="btn-outline-icon">←</a>
+      <div>
+        <h1 class="page-title">{{ client.company_name }}</h1>
+        <p class="page-subtitle">Client Information &amp; Resources</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Overview -->
+  <div class="card">
+    <img class="office-pic" src="{% static 'icons/office-building.svg' %}" alt="Office" />
+    <div>
+      <h2 class="card-title">Client Overview</h2>
+    </div>
+    
+
+    <div class="overview-grid">
+      
+      <!-- Contact Info -->
+      <div>
+        <h4>Contact Information</h4>
+        <p>
+          <img class="user-pic" src="{% static 'icons/user.svg' %}" alt="User" />
+          <span class="client-name">{{ client.client_name }}</span>
+        </p>
+        <p>
+          <img class="email-pic" src="{% static 'icons/email.svg' %}" alt="Email" />
+          {{ client.client_email }}
+        </p>
+        <p>
+          <img class="phone-pic" src="{% static 'icons/phone.svg' %}" alt="Phone" />
+          {{ client.phone }}
+        </p>
+        {% if client.representative_name%}
+            <p><i>Representative Contact:</i></p><p> Name:{{ client.representative_name }}</p> <p> Phone: {{client.representative_phone}}</p>
+        {% endif %}
+
+
+      </div>
+
+      <!-- Business Details -->
+      <div>
+        <h4>Business Details</h4>
+        <p> Financial Year : {{client.financial_year}}</p>
+        <p> VAT TRN: {{client.VAT_TRN}} </p>
+      </div>
+
+      <!-- Service Info -->
+      <div>
+        <h4>Service Information</h4>
+        <span class="status-badge {{ client.status }}">{{ client.status }}</span>
+        {% if client.services %}
+          <p><strong>Service:</strong> {{ client.services}}</p>
+        {% endif %}
+        {% if client.onboarding_date %}
+          <p><strong>Onboarded:</strong> {{ client.onboarding_date }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Stats -->
+      <div>
+        <h4>Summary Stats</h4>
+        <p><strong>Documents:</strong> {{ documents|length }}</p>
+        <p><strong>Deadlines:</strong> {{ deadlines|length }}</p>
+        {% if client.annual_revenue %}
+          <p><strong>Annual Revenue:</strong> {{ client.annual_revenue }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- Assigned Staff -->
+    {% if assigned_staff %}
+    <div class="section">
+      <h4>👥 Assigned Staff ({{ assigned_staff|length }})</h4>
+      <div class="staff-grid">
+        {% for staff in assigned_staff %}
+        <div class="staff-card">
+          <div class="staff-icon">👤</div>
+          <div>
+            <p class="staff-name">{{ staff.full_name }}</p>
+            <p class="staff-meta">{{ staff.position }} • {{ staff.department }}</p>
+            <p class="staff-email">{{ staff.email }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="section no-staff">
+      <p>No staff assigned to this client</p>
+    </div>
+    {% endif %}
+
+    <!-- Address -->
+    {% if client.address %}
+    <div class="section">
+      <h4>📍 Address</h4>
+      <p>{{ client.address }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Notes -->
+    {% if client.notes %}
+    <div class="section">
+      <h4>📝 Notes</h4>
+      <p>{{ client.notes }}</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tabs-header">
+      <a href="#documents" class="tab active">📄 Resource Bank ({{ documents|length }})</a>
+      <a href="#deadlines" class="tab">📅 Deadlines ({{ deadlines|length }})</a>
+    </div>
+
+    <div id="documents" class="tab-content">
+      {% for doc in documents %}
+        <p>{{ doc.name }}</p>
+      {% empty %}
+        <p>No documents found.</p>
+      {% endfor %}
+    </div>
+
+    <div id="deadlines" class="tab-content" style="display:none;">
+      {% for deadline in deadlines %}
+        <p>{{ deadline.title }} - {{ deadline.due_date }}</p>
+      {% empty %}
+        <p>No deadlines found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+  

@@ -1,60 +1,109 @@
 body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }   
-        .sidebar {
-            width: 200px;
-            background-color: #135B7E;
-            color: white;
-            position: fixed;
-            height: 100%;
-            padding: 20px;
-        }
-       
-        .sidebar img {
-            width: max-content;
-            height: max-content;
-            max-width: 120px;
-            margin-bottom: 20px;
-        }
-        .main {
-            margin-left: 200px;
-            background-color: #E0EFFC;
-            min-height: 100vh;
-        }
-        .topbar {
-            padding: 10px;
-            background-color: #D6E9F8;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .topbar button {
-            background-color: #135B7E;
-            color: white;
-            padding: 10px 20px;
-            border: 1px solid black;
-            cursor: default;
-        }
-        .content {
-            padding: 30px;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .section a {
-            color: white;
-            display: block;
-            padding-left: 10px;
-            margin: 5px 0;
-            text-decoration: none;
-        }
-        .section-title {
-            font-weight: bold;
-            margin-top: 15px;
-        }
-        hr {
-            border: 0;
-            height: 0px;
-            background-color: white;
-        }
-   
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f4f5fa;
+  color: #1c2940;
+}
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* Sidebar */
+.sidebar {
+  background: #fff;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 24px rgba(44,62,80,0.07);
+}
+
+
+.crm-logo {
+  font-size: 2.3rem;
+  background: #e5ecff;
+  color: #184c96;
+  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 17px;
+}
+.crm-meta .crm-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #184c96;
+}
+.crm-meta .crm-desc {
+  font-size: 0.97rem;
+  color: #758cae;
+  margin-top: 4px;
+}
+.sidebar-nav {
+  padding: 28px 0 0 0;
+  flex: 1 1 auto;
+}
+.nav-label {
+  font-size: 0.8rem;
+  color: #8fa2bb;
+  font-weight: 600;
+  margin: 0 0 15px 25px;
+  letter-spacing: 0.06em;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 30px 12px 22px;
+  font-size: 1.09em;
+  color: #1c2940;
+  border-radius: 9px;
+  margin: 0 14px 3px 14px;
+  text-decoration: none;
+  transition: background 0.11s, color 0.11s;
+  font-weight: 500;
+}
+.nav-link.active,
+.nav-link:hover {
+  background: #184c96;
+  color: #fff;
+}
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px 23px;
+  border-top: 1px solid #f1f3f5;
+  background: #f8faff;
+}
+.user-avatar {
+  background: #e5ecff;
+  color: #184c96;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.14rem;
+}
+.user-name {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #184c96;
+}
+.user-role {
+  font-size: 0.83rem;
+  color: #6c7a92;
+}
+
+.sidebar-img{
+  width: 20px;
+  height: 20px;
+  margin-left: 40px;
+}

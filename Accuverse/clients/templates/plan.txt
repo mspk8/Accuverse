@@ -1,0 +1,7 @@
+- Main dashboard
+- client general page
+    - All client cards show
+- Complete client profile page
+- manage client page
+- add client page
+- edit client page

@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/client_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/client_add.css' %}">
+<title>{% block title %}Add New Client{% endblock %}</title>
+{% endblock %}
+
+{% block content %}
+<div class="add-client-page">
+  <div class="add-client-container">
+
+    <h1 class="page-title">Add New Client</h1>
+    <p class="page-subtitle">Create a new client profile</p>
+
+<form method="POST" action="{% url 'add-clients' %}">
+    {% csrf_token %}      <!-- Contact Info -->
+      <div class="section-card">
+        <div class="section-header"> || Contact Information</div>
+        <div class="section-body two-col">
+          <div class="form-group">
+            <label>Client Name *</label>
+            <input type="text" name="client_name" required>
+          </div>
+          <div class="form-group">
+            <label>Phone*</label>
+            <input type="text" name="phone"required>
+          </div>
+          <div class="form-group">
+            <label>Email </label>
+            <input type="email" name="client_email" >
+          </div>
+          <div class="form-group">
+            <label>Representative Name</label>
+            <input type="text" name="representative_name">
+          </div>
+          <div class="form-group">
+            <label>Representative Phone</label>
+            <input type="text" name="representative_phone">
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Info -->
+<div class="section-card">
+    <div class="section-header">|| Business Info</div>
+    <div class="section-body two-col">
+
+        <!-- Business Name -->
+        <div class="form-group">
+            <label>Company Name *</label>
+            <input type="text" name="company_name" required>
+        </div>
+
+        <!-- Financial Year (single value June-July) -->
+        <div class="form-group">
+            <label>Financial Year*</label>
+            <div class="fy-select-wrapper">
+                <select id="fy-start">
+                    <option value="">Start Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+                <span class="fy-separator">—</span>
+                <select id="fy-end">
+                    <option value="">End Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+            </div>
+
+            <!-- Hidden field that will store "June-July" -->
+            <input type="hidden" name="financial_year" id="financial_year" required>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group full-width">
+            <label>Address</label>
+            <textarea name="address" rows="2"></textarea>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const fyStart = document.getElementById("fy-start");
+    const fyEnd = document.getElementById("fy-end");
+    const fyHidden = document.getElementById("financial_year");
+
+    function updateFinancialYear() {
+        const start = fyStart.value;
+        const end = fyEnd.value;
+        if (start && end) {
+            fyHidden.value = `${start}-${end}`;
+        } else {
+            fyHidden.value = "";
+        }
+    }
+
+    fyStart.addEventListener("change", updateFinancialYear);
+    fyEnd.addEventListener("change", updateFinancialYear);
+});
+</script>
+
+<!-- Tax Info -->
+<div class="section-card">
+    <div class="section-header">|| Tax Info</div>
+    <div class="section-body two-col">
+
+        <!-- VAT Return Months (checkbox multi-select) -->
+        <div class="form-group full-width">
+            <label>VAT Return Months</label>
+            <div class="ac-checkbox-group">
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="January"> January
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="February"> February
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="March"> March
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="April"> April
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="May"> May
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="June"> June
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="July"> July
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="August"> August
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="September"> September
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="October"> October
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="November"> November
+                </label>
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="vat_return_months" value="December"> December
+                </label>
+            </div>
+        </div>
+
+        <!-- TRN Number -->
+        <div class="form-group">
+            <label>VAT TRN Number</label>
+            <input type="text" name="VAT_TRN">
+        </div>
+
+        <!-- CT Financial Year -->
+        <div class="form-group full-width">
+            <label>CT Financial Year (if different)</label>
+            <div class="fy-select-wrapper">
+                <select id="ct-fy-start">
+                    <option value="">Start Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+                <span class="fy-separator">—</span>
+                <select id="ct-fy-end">
+                    <option value="">End Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+
+                <!-- Copy checkbox -->
+                <label style="margin-left: 1rem; display:flex; align-items:center; gap:0.4rem; font-weight:500;">
+                    <input type="checkbox" id="same-as-business-fy">
+                    Same as Business FY
+                </label>
+            </div>
+
+            <!-- Hidden field stores "Month-Month" value -->
+            <input type="hidden" name="ct_financial_year" id="ct_financial_year">
+        </div>
+
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Business FY selects (IDs from your Business Info section)
+    const busStart = document.getElementById("fy-start");
+    const busEnd = document.getElementById("fy-end");
+
+    // CT FY elements
+    const ctStart = document.getElementById("ct-fy-start");
+    const ctEnd = document.getElementById("ct-fy-end");
+    const ctHidden = document.getElementById("ct_financial_year");
+    const sameCheckbox = document.getElementById("same-as-business-fy");
+
+    function updateCTFY() {
+        const start = ctStart.value;
+        const end = ctEnd.value;
+        if (start && end) {
+            ctHidden.value = `${start}-${end}`;
+        } else {
+            ctHidden.value = "";
+        }
+    }
+
+    // Copy & lock values from Business FY when checked
+    sameCheckbox.addEventListener("change", function() {
+        if (this.checked) {
+            ctStart.value = busStart.value;
+            ctEnd.value = busEnd.value;
+            ctStart.disabled = true;
+            ctEnd.disabled = true;
+            updateCTFY();
+        } else {
+            ctStart.disabled = false;
+            ctEnd.disabled = false;
+            ctHidden.value = "";
+        }
+    });
+
+    ctStart.addEventListener("change", updateCTFY);
+    ctEnd.addEventListener("change", updateCTFY);
+});
+</script>
+
+
+<!-- Services Info -->
+<div class="section-card">
+    <div class="section-header">|| Services Info</div>
+    <div class="section-body two-col">
+
+        <!-- Onboarding Date -->
+        <div class="form-group">
+            <label>Onboarding Date</label>
+            <input type="date" name="onboarding_date">
+        </div>
+
+        <!-- Services Offered as Checkbox Group -->
+        <div class="form-group full-width">
+            <label>Services Offered</label>
+            <div class="ac-checkbox-group">
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="Bookkeeping">
+                    Bookkeeping
+                </label>
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="Audit">
+                    Audit
+                </label>
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="VAT Filing">
+                    VAT Filing
+                </label>
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="Payroll">
+                    Payroll
+                </label>
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="CT Filing">
+                    CT Filing
+                </label>
+
+                <label class="ac-checkbox">
+                    <input type="checkbox" name="services" value="Consultancy">
+                    Consultancy
+                </label>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+      <!-- FTA Credentials -->
+      <div class="section-card">
+        <div class="section-header">|| FTA Credentials</div>
+        <div class="section-body two-col">
+          <div class="form-group">
+            <label>User ID</label>
+            <input type="text" name="FTA_email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="FTA_password">
+          </div>
+        </div>
+      </div>
+<!-- Notes -->
+<div class="section-card">
+    <div class="section-header">Notes</div>
+    <div class="section-body">
+        <div class="form-group full-width">
+            <label>Additional Notes</label>
+            <textarea name="notes" rows="4" placeholder="Enter any remarks or important information about the client"></textarea>
+        </div>
+    </div>
+</div>
+      <!-- Actions -->
+       <div class="form-actions">
+        <button type="reset" class="btn-outline">Cancel</button>
+        <button type="submit" class="btn-primary">Create Client</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/client_main.css' %}">
+<title>{% block title %}Clients Dashboard{% endblock %}</title>
+
+{% endblock %}
+
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients – ClientFlow CRM</title>
+</head>
+<body>
+  
+  <!-- Main content -->
+  <main class="main">
+    <div class="main-header">
+      <div>
+        <h1 class="main-title">Clients</h1>
+        <div class="main-caption">Manage your accounting firm's client portfolio</div>
+      </div>
+<a href="{% url 'add-clients' %}" class="btn btn-primary">
+    + Add New Client </a>
+    </div>
+    <div class="clients-toolbar">
+      <input class="search-box" type="text" placeholder="Search clients by name, contact person, or email…">
+      <select class="filter-select"><option>All Status</option></select>
+      <select class="filter-select"><option>All Services</option></select>
+    </div>
+    <div class="clients-list">
+      <!-- Client Card 1 -->
+       <div class="clients-list">
+  {% for client in show_clients %}
+    <div class="client-card">
+      <div class="client-card-header">
+        <span class="client-card-icon">🏢</span>
+        <span class="client-card-title">{{ client.company_name }}</span>
+        <span class="client-card-status active">active</span>
+      </div>
+      <div class="client-card-meta">{{ client.client_name }}</div>
+      <div class="client-card-contact">
+        <div><span class="icon">📧</span> {{ client.client_email }}</div>
+        <div><span class="icon">📞</span> {{ client.phone }}</div>
+        <div><span class="icon">📍</span> {{ client.address }}</div>
+      </div>
+      <div class="client-card-bottom">
+        {% for service in client.services.all %}
+          <span class="tag">{{ service.name }}</span>
+        {% endfor %}
+        <a href="{% url 'client-details' client.id %}" class="view-btn"> VIEW
+    
+</a>
+
+      </div>
+    </div>
+  {% empty %}
+    <div>No clients found.</div>
+  {% endfor %}
+</div>
+
+  </main>
+</div>
+</body>
+</html>
+
+
+
+{% endblock %}
